@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "",
+    "start": "mongod --dbpath=data & node index.js & (sleep 3; open http://localhost:8000; mongo)",
+    "stop": "killall node; killall mongod;",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
