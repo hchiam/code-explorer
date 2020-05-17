@@ -1,0 +1,20 @@
+{
+  "apis": {},
+  "observations": [
+    {
+      "timestamp": "",
+      "action": "",
+      "objectName": "",
+      "parameters": [],
+      "results": {
+        "exampleProperty": {
+          "observationsCount": 0,
+          "values": {
+            "value1": { "value": "", "count": 0 },
+            "value2": { "value": "", "count": 0 }
+          }
+        }
+      }
+    }
+  ]
+}

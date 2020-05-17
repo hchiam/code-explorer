@@ -1,0 +1,26 @@
+{
+  "name": "code-explorer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "mongodb": "^3.5.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hchiam/code-explorer.git"
+  },
+  "author": "hchiam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hchiam/code-explorer/issues"
+  },
+  "homepage": "https://github.com/hchiam/code-explorer#readme"
+}
