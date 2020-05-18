@@ -70,13 +70,3 @@ function deleteFromCollection(client, db, collectionName, query) {
     client.close();
   });
 }
-
-function getApi1LevelDeep(object) {
-  const api = [];
-  for (let key in object) {
-    // api.push(key);
-    const entry = { key: key, type: typeof object[key] };
-    api.push(entry);
-  }
-  return api;
-}
