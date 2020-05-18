@@ -5,6 +5,8 @@ const dbUrl = "mongodb://localhost:27017";
 const dbName = "takeaways";
 const collectionName = "takeaways";
 
+const { runShellCommand } = require("./public/shell.js");
+
 const express = require("express");
 const app = express();
 
@@ -13,14 +15,24 @@ app.listen(port, function () {
   console.log(`port ${port}`);
 });
 
+app.use(express.json());
 app.use("/public", express.static(process.cwd() + "/public"));
 app.use("/styles", express.static(process.cwd() + "/styles"));
 app.use("/views", express.static(process.cwd() + "/views"));
 
 app.route("/").get(function (req, res) {
+  console.log("GET");
   res.sendFile(process.cwd() + "/views/index.html");
   readJson("takeaways.json");
   connectToDb();
+});
+
+app.route("/shell").post(function (req, res) {
+  const command = req.body.command;
+  if (!command) return;
+  console.log(`shell command: ${command}`);
+  const output = runShellCommand(command);
+  res.send({ result: output });
 });
 
 function readJson(filePath) {

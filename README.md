@@ -11,7 +11,7 @@ mongod --dbpath=data
 ## Run server
 
 ```bash
-node index.js
+node server.js
 ```
 
 ## Debug database

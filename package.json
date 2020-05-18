@@ -2,7 +2,7 @@
   "name": "code-explorer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
@@ -10,9 +10,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "mongod --dbpath=data & node index.js & (sleep 3; open http://localhost:8000; mongo)",
+    "start": "mongod --dbpath=data & node server.js & (sleep 3; open http://localhost:8000; mongo)",
     "stop": "killall node; killall mongod;",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
