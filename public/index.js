@@ -1,7 +1,11 @@
 startup();
 
 async function startup() {
-  say("Up and running.", { sentenceCallback: console.log });
+  say("Up and running.", {
+    sentenceCallback: (message) => {
+      console.log(message, true);
+    },
+  });
   await runShellCommand("yarn test");
   say("When you're done, remember to run yarn stop.");
 }
@@ -24,9 +28,14 @@ function say(sentence, options) {
 }
 
 async function runShellCommand(command) {
+  console.log("Running " + command, true);
   say("Running " + command);
   const result = await sendShellCommand(command);
-  say(`Result: ${result}`);
+  say(`Result: ${result}`, {
+    sentenceCallback: (message) => {
+      console.log(message, true);
+    },
+  });
 }
 
 function getApi1LevelDeep(object) {

@@ -2,7 +2,7 @@ const execSync = require("child_process").execSync;
 
 function runShellCommand(command) {
   const output = execSync(command, { encoding: "utf-8" }); // the default is 'buffer'
-  console.log(`\n\nShell output:\n\n${output}\n\n`);
+  console.log(`\n\nShell output:\n\n${output}\n\n`, true);
   return output;
 }
 
@@ -14,7 +14,7 @@ async function sendShellCommand(command) {
     },
     body: JSON.stringify({ command: command }),
   }).then((res) => {
-    console.log(res);
+    console.log(res, true);
     return res.statusText;
   });
   return statusText;
