@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@tensorflow-models/universal-sentence-encoder": "^1.2.2",
+    "@tensorflow/tfjs": "^1.7.4",
+    "@tensorflow/tfjs-node": "^1.7.4",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "mongodb": "^3.5.7"
