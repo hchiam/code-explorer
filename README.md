@@ -40,6 +40,8 @@ db.takeaways.find()
 
 ### Steps
 
+Different from semantic code search because also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
+
 1. get goal
 2. get embeddings of props/actions
 3. get embeddings so it can get ideas of combos to try:
