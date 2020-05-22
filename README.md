@@ -37,10 +37,9 @@ db.takeaways.find()
 
 - modularize (e.g. useDb(), useTensorFlow(), ... - could rename better)
 - make sure generic so can use in other projects
+- do the following steps:
 
 ### Steps
-
-Different from semantic code search because also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
 
 1. get goal
 2. get embeddings of props/actions
@@ -62,3 +61,7 @@ Different from semantic code search because also proactively checks error logs, 
 8. get and store results and results frequencies for what tried:
    - how use this to check if achieved goal?
 9. report findings from results of actions tried
+
+### Stepping back
+
+This process is different from semantic code search because it also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
