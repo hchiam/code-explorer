@@ -9,9 +9,16 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/hchiam/language-user-interface@master/ear.js"></script> -->
   </head>
   <body>
+    <!-- make sure console.js is first so it overrides console.log -->
     <script src="../public/console.js"></script>
-    <script src="../public/shell.js"></script>
+    <!-- make sure these are 2nd: -->
     <script src="../public/responsiveVoiceBackup.js"></script>
+    <script src="../public/say.js"></script>
+
+    <script src="../public/internet-connection.js"></script>
+    <script src="../public/shell.js"></script>
+    <script src="../public/api-search.js"></script>
+
     <!-- make sure this one's last: -->
     <script src="../public/index.js"></script>
   </body>

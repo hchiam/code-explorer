@@ -1,4 +1,4 @@
-const { getApi1LevelDeep } = require("../public/index.js");
+const { getApi1LevelDeep } = require("../public/api-search.js");
 
 test("the number of props", function () {
   expect(getApi1LevelDeep(Math).length).toBe(43);

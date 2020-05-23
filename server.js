@@ -1,11 +1,7 @@
-const fs = require("fs");
-
-const mongo = require("mongodb").MongoClient;
-const dbUrl = "mongodb://localhost:27017";
-const dbName = "takeaways";
-const collectionName = "takeaways";
-
+const { readJson } = require("./public/read-files.js");
+const { connectToDb } = require("./public/use-db.js");
 const { runShellCommand } = require("./public/shell.js");
+const { useTensorFlowJs } = require("./public/tfjs.js");
 
 const express = require("express");
 const app = express();
@@ -34,51 +30,3 @@ app.route("/shell").post(function (req, res) {
   const output = runShellCommand(command);
   res.send({ result: output });
 });
-
-function readJson(filePath) {
-  filePath = filePath.toString();
-  if (filePath.endsWith(".json")) {
-    const data = JSON.parse(readFile(filePath, "utf8"));
-    console.log(data, true);
-  } else {
-    console.log(`Is file ${filePath} a JSON file?`, true);
-  }
-}
-
-function readFile(filePath) {
-  return fs.readFileSync(filePath, "utf8");
-}
-
-function connectToDb() {
-  mongo.connect(dbUrl, function (err, client) {
-    if (err) throw err;
-    const db = client.db(dbName);
-    connectToCollection(client, db, collectionName);
-  });
-}
-
-function connectToCollection(client, db, collectionName) {
-  db.createCollection(collectionName, function (err, res) {
-    if (err) throw err;
-    console.log("collection created", true);
-    client.close();
-  });
-}
-
-function insertIntoCollection(client, db, collectionName, data) {
-  // example data = { name: 'Company 123', address: '123 Somewhere Street' };
-  db.collection(collectionName).insertOne(data, function (err, res) {
-    if (err) throw err;
-    console.log("1 document inserted", true);
-    client.close();
-  });
-}
-
-function deleteFromCollection(client, db, collectionName, query) {
-  // example query = { name: { $regex: /Company/ } };
-  db.collection(collectionName).deleteMany(query, function (err, obj) {
-    if (err) throw err;
-    console.log(`${obj.result.n} document(s) deleted`, true);
-    client.close();
-  });
-}

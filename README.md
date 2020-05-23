@@ -14,6 +14,12 @@ mongod --dbpath=data
 node server.js
 ```
 
+## See dependency graph
+
+```bash
+depcruise --exclude "^node_modules" --output-type dot . | dot -T svg > dependencygraph.svg; open -a "Firefox" dependencygraph.svg;
+```
+
 ## Debug database
 
 ```bash
@@ -35,8 +41,8 @@ db.takeaways.find()
 
 ### Housekeeping
 
-- modularize (e.g. useDb(), useTensorFlow(), ... - could rename better)
-- make sure generic so can use in other projects
+- modularize tfjs.js
+- clean up tfjs.js to be used specifically for code-explorer
 - do the following steps:
 
 ### Steps
@@ -65,3 +71,15 @@ db.takeaways.find()
 ### Stepping back
 
 This process is different from semantic code search because it also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
+
+## Other notes
+
+### ResponsiveVoice
+
+<div><a href="https://responsivevoice.org">ResponsiveVoice-NonCommercial</a> licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img title="ResponsiveVoice Text To Speech" src="https://responsivevoice.org/wp-content/uploads/2014/08/95x15.png" alt="95x15" width="95" height="15" /></a></div>
+
+### TensorFlow.js Universal Sentence Encoder lite
+
+<https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder>
+
+<https://github.com/hchiam/text-similarity-test>

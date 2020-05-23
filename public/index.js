@@ -1,76 +1,35 @@
+// avoid undefined if require() is undefined:
+var say;
+var sendShellCommand;
+var getApi1LevelDeep;
+if (typeof require !== "undefined") {
+  const { say } = require("./say.js");
+  const { sendShellCommand } = require("./shell.js");
+  const { getApi1LevelDeep } = require("./api-search.js");
+}
+
 startup();
 
-async function startup() {
+function startup() {
   say("Up and running.", {
     sentenceCallback: (message) => {
       console.log(message, true);
     },
   });
-  await runShellCommand("yarn test");
-  say("When you're done, remember to run yarn stop.");
+  console.log("Running startup tests.", true);
+  say("Running startup tests.");
+  setTimeout(async () => {
+    await runStartupTests();
+    say("When you're done, remember to run yarn stop.");
+  }, 1000);
 }
 
-function say(sentence, options) {
-  if (sentence != "" && typeof responsiveVoice !== "undefined") {
-    const sentenceCallback =
-      options && options.sentenceCallback ? options.sentenceCallback : null;
-    let rate = options && options.rate ? options.rate : 1.5;
-    if (sentence.length > 30) {
-      rate = 1;
-    }
-    if (sentence.length > 100) {
-      rate = 0.9;
-      sentence = "I've got a lot to tell you. " + sentence;
-    }
-    responsiveVoice.speak(sentence, "UK English Male", { rate: rate });
-    if (sentenceCallback) sentenceCallback(sentence);
-  }
-}
-
-async function runShellCommand(command) {
-  console.log("Running " + command, true);
-  say("Running " + command);
-  const result = await sendShellCommand(command);
-  say(`Result: ${result}`, {
-    sentenceCallback: (message) => {
-      console.log(message, true);
-    },
+async function runStartupTests() {
+  await sendShellCommand("yarn test", (result) => {
+    say(`Result: ${result}`, {
+      sentenceCallback: (message) => {
+        console.log(message, true);
+      },
+    });
   });
-}
-
-function getApi1LevelDeep(object) {
-  const api = [];
-  function getPropsSet(object) {
-    // if (object == null) return [];
-    const set = new Set();
-    const propNames = Object.getOwnPropertyNames(object); // this works on Math
-    propNames.forEach((p) => set.add(p));
-    for (let prop in object) {
-      // this works on document
-      set.add(prop);
-    }
-    if (object.__proto__) {
-      const objectProto = Object.getPrototypeOf(object.__proto__); // this works for NaN
-      if (objectProto) {
-        const morePropNames = Object.getOwnPropertyNames(objectProto);
-        morePropNames.forEach((p) => {
-          set.add(p);
-        });
-      }
-    }
-    return set.keys();
-  }
-  const keys = getPropsSet(object); // works on both Math and document
-  for (let key of keys) {
-    // api.push(key);
-    const entry = { key: key, type: typeof object[key] };
-    api.push(entry);
-  }
-  return api;
-}
-
-if (typeof exports !== "undefined") {
-  if (typeof module !== "undefined" && module.exports) {
-    module.exports = { getApi1LevelDeep };
-  }
 }

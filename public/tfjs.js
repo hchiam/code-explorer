@@ -1,25 +1,28 @@
 require("@tensorflow/tfjs-node");
 const use = require("@tensorflow-models/universal-sentence-encoder");
 
-useModelToEmbedAllWords(words, fs);
+// TODO: modularize this
+// TODO: use this specifically for code-explorer
+function useTensorFlowJs() {
+  console.log("good");
+  // useModelToEmbedAllWords(words, fs);
+  // const input = "Hi!";
+  // const reference = "Hey.";
+  // let similarityPercent;
+  // compare(input, reference).then((result) => {
+  //   similarityPercent = result;
+  //   console.log(`\n${similarityPercent}\n`);
+  // });
+}
 
-const input = "Hi!";
-const reference = "Hey.";
-let similarityPercent;
-
-compare(input, reference).then((result) => {
-  similarityPercent = result;
-  console.log(`\n${similarityPercent}\n`);
-});
-
-export function useModelToEmbedAllWords(words, fs) {
+function useModelToEmbedAllWords(words, fs) {
   // uses Universal Sentence Encoder (U.S.E.):
   use.load().then((model) => {
     embedAllSentences(model, words, fs);
   });
 }
 
-export function embedAllSentences(model, words, fs) {
+function embedAllSentences(model, words, fs) {
   fs.writeFile("embeddings.txt", "", function (err) {
     if (err) throw err;
     console.log("Cleared embeddings file.");
@@ -42,11 +45,11 @@ export function embedAllSentences(model, words, fs) {
   });
 }
 
-export async function compare(input, reference) {
+async function compare(input, reference) {
   return await useModel(input, reference);
 }
 
-export async function useModel(sentence1, sentence2) {
+async function useModel(sentence1, sentence2) {
   // uses Universal Sentence Encoder (U.S.E.):
   const output = await use.load().then(async (model) => {
     const similarityFraction = await embedSentences(
@@ -73,7 +76,7 @@ async function embedSentences(model, sentence1, sentence2) {
   });
 }
 
-export async function getSimilarityPercent(embed1, embed2) {
+async function getSimilarityPercent(embed1, embed2) {
   const similarity = await cosineSimilarity(embed1, embed2);
   // cosine similarity -> % when doing text comparison, since cannot have -ve term frequencies: https://en.wikipedia.org/wiki/Cosine_similarity
   return similarity;
@@ -98,4 +101,17 @@ function dotProduct(a, b) {
     sum += a[i] * b[i];
   }
   return sum;
+}
+
+if (typeof exports !== "undefined") {
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      useTensorFlowJs,
+      useModelToEmbedAllWords,
+      embedAllSentences,
+      compare,
+      useModel,
+      getSimilarityPercent,
+    };
+  }
 }
