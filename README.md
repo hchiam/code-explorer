@@ -39,6 +39,10 @@ db.takeaways.find()
 
 ## Todo
 
+- investigate more efficient way to search nearest embeddings (instead of checking every single one stored in memory):
+  - <https://cloud.google.com/solutions/machine-learning/building-real-time-embeddings-similarity-matching-system> and:
+  - <https://github.com/GoogleCloudPlatform/realtime-embeddings-matching/tree/master/text-semantic-search>
+
 ### Steps
 
 1. get goal
