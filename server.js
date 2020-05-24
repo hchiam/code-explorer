@@ -41,7 +41,26 @@ app.route("/embed1Sentence").post(async function (req, res) {
   const sentence = req.body.sentence;
   if (!sentence) return;
   console.log(`getting embedding for this sentence: ${sentence}`);
-  const embedding = await embed1Sentence(sentence);
-  console.log(`Embedding: ${embedding}`);
+  const embeddingObject = await embed1Sentence(sentence);
+  const embedding = embeddingObject[sentence];
+  console.log(`Embedding retrieved.`);
   res.send({ embedding });
+});
+
+app.route("/embedAllSentences").post(async function (req, res) {
+  const sentences = req.body.sentences;
+  if (!sentences) return;
+  console.log(`getting embedding for ${sentences.length} sentences.`);
+  const embeddingsObject = await embedAllSentences(sentences);
+  console.log(`Embeddings retrieved.`);
+  res.send({ embeddingsObject });
+});
+
+app.route("/compareEmbeddings").post(async function (req, res) {
+  const sentence = req.body.sentence;
+  if (!sentence) return;
+  console.log(`getting embedding for this sentence: ${sentence}`);
+  const similarityPercent = await compareEmbeddings(sentence);
+  console.log(`Similarity percent: ${similarityPercent}`);
+  res.send({ similarityPercent });
 });
