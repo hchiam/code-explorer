@@ -42,5 +42,6 @@ app.route("/embed1Sentence").post(async function (req, res) {
   if (!sentence) return;
   console.log(`getting embedding for this sentence: ${sentence}`);
   const embedding = await embed1Sentence(sentence);
+  console.log(`Embedding: ${embedding}`);
   res.send({ embedding });
 });
