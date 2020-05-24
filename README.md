@@ -39,11 +39,6 @@ db.takeaways.find()
 
 ## Todo
 
-### Housekeeping
-
-- don't index whole array of string in api-search.js
-- do the following steps:
-
 ### Steps
 
 1. get goal
