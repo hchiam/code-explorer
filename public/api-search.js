@@ -1,14 +1,15 @@
 function getApi1LevelDeep(object) {
+  // uses isNaN to try to ignore indices of array, especially of strings
   const api = [];
   function getPropsSet(object) {
-    // TODO: don't index whole array of string
     // if (object == null) return [];
     const set = new Set();
     const propNames = Object.getOwnPropertyNames(object); // this works on Math
-    propNames.forEach((p) => set.add(p));
+    propNames.forEach((p) => (isNaN(p) ? set.add(p) : ""));
     for (let prop in object) {
-      // this works on document
-      set.add(prop);
+      if (isNaN(prop)) {
+        set.add(prop); // this works on document
+      }
     }
     if (object.__proto__) {
       const objectProto = Object.getPrototypeOf(object.__proto__); // this works for NaN
