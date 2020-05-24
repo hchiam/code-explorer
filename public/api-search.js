@@ -1,6 +1,7 @@
 function getApi1LevelDeep(object) {
   const api = [];
   function getPropsSet(object) {
+    // TODO: don't index whole array of string
     // if (object == null) return [];
     const set = new Set();
     const propNames = Object.getOwnPropertyNames(object); // this works on Math

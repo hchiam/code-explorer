@@ -10,7 +10,7 @@ if (typeof require !== "undefined") {
 
 startup();
 
-function startup() {
+async function startup() {
   say("Up and running.", {
     sentenceCallback: (message) => {
       console.log(message, true);
@@ -18,18 +18,36 @@ function startup() {
   });
   console.log("Running startup tests.", true);
   say("Running startup tests.");
-  setTimeout(async () => {
-    await runStartupTests();
-    say("When you're done, remember to run yarn stop.");
-  }, 1000);
+  await runStartupTests();
+  say("When you're done, remember to run yarn stop.");
+  const api = getApi1LevelDeep(document.body);
+  const sentence = api[0].key; // document.body's api[0].key is "text"
+  say(`Getting embedding of ${sentence}.`);
+  const embedding = await embed1Sentence(sentence);
+  say("The embedding should be displayed in the console log.");
+  console.log(embedding, true);
 }
 
 async function runStartupTests() {
   await sendShellCommand("yarn test", (result) => {
-    say(`Result: ${result}`, {
-      sentenceCallback: (message) => {
-        console.log(message, true);
-      },
-    });
+    const tellUser = `Result: ${result}`;
+    console.log(tellUser);
+    say(tellUser);
   });
+}
+
+async function embed1Sentence(sentence, callback) {
+  const embedding = await fetch("/embed1Sentence", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sentence }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res.embedding;
+    });
+  if (callback) callback(embedding);
+  return embedding;
 }

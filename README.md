@@ -41,8 +41,7 @@ db.takeaways.find()
 
 ### Housekeeping
 
-- modularize tfjs.js
-- clean up tfjs.js to be used specifically for code-explorer
+- don't index whole array of string in api-search.js
 - do the following steps:
 
 ### Steps

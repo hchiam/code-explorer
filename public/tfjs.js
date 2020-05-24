@@ -1,85 +1,92 @@
 require("@tensorflow/tfjs-node");
-const use = require("@tensorflow-models/universal-sentence-encoder");
+const use = require("@tensorflow-models/universal-sentence-encoder"); // U.S.E.
 
-// TODO: modularize this
-// TODO: use this specifically for code-explorer
-function useTensorFlowJs() {
-  console.log("good");
-  // useModelToEmbedAllWords(words, fs);
-  // const input = "Hi!";
-  // const reference = "Hey.";
-  // let similarityPercent;
-  // compare(input, reference).then((result) => {
-  //   similarityPercent = result;
-  //   console.log(`\n${similarityPercent}\n`);
-  // });
-}
+async function embedAllSentences(inputSentences) {
+  /**
+   * usage:
+   * const embeddingsObject = await embedAllSentences(["hi", "hello", "this is cool"]);
+   * const embedding1 = embeddingsObject["hi"];
+   */
 
-function useModelToEmbedAllWords(words, fs) {
-  // uses Universal Sentence Encoder (U.S.E.):
-  use.load().then((model) => {
-    embedAllSentences(model, words, fs);
-  });
-}
+  if (!Array.isArray(inputSentences) || typeof inputSentences === "string") {
+    return {};
+  }
 
-function embedAllSentences(model, words, fs) {
-  fs.writeFile("embeddings.txt", "", function (err) {
-    if (err) throw err;
-    console.log("Cleared embeddings file.");
-  });
-  model.embed(words).then((embeddings) => {
-    const embeds = embeddings.arraySync();
-    if (fs) {
-      let embeddingsOutput = "";
-      for (let i = 0; i < embeds.length; i++) {
-        const embed = embeds[i];
-        const addNewLine = i === 0 ? "" : "\n";
-        embeddingsOutput += addNewLine + embed;
-        console.log(`Added embedding ${i + 1}!`);
+  const sentences = inputSentences.map((s) => camelCaseToSpaces(s));
+
+  return await use.load().then((model) => {
+    return model.embed(sentences).then((embeds) => {
+      const embeddings = embeds.arraySync();
+      let embeddingsObject = {};
+      for (let i = 0; i < embeddings.length; i++) {
+        embeddingsObject[sentences[i]] = embeddings[i];
       }
-      fs.appendFile("embeddings.txt", embeddingsOutput, function (err) {
-        if (err) throw err;
-      });
-      console.log("Done adding all embeddings (mapped by index).");
-    }
+      return embeddingsObject;
+    });
   });
 }
 
-async function compare(input, reference) {
-  return await useModel(input, reference);
-}
+async function embed1Sentence(inputSentence) {
+  /**
+   * usage:
+   * const embeddingObject = await embed1Sentence('hello there');
+   * const embedding = embeddingObject["hello there"];
+   */
 
-async function useModel(sentence1, sentence2) {
-  // uses Universal Sentence Encoder (U.S.E.):
-  const output = await use.load().then(async (model) => {
-    const similarityFraction = await embedSentences(
-      model,
-      sentence1,
-      sentence2
-    );
-    return Math.round(similarityFraction * 100 * 100) / 100 + "%";
-  });
-  return output;
-}
+  if (typeof inputSentence !== "string") return {};
 
-async function embedSentences(model, sentence1, sentence2) {
-  const sentences = [sentence1, sentence2];
-  return await model.embed(sentences).then(async (embeddings) => {
-    const embeds = await embeddings.arraySync();
-    const sentence1Embedding = embeds[0];
-    const sentence2Embedding = embeds[1];
-    const similarityPercent = await getSimilarityPercent(
-      sentence1Embedding,
-      sentence2Embedding
-    );
-    return similarityPercent;
+  const sentence = camelCaseToSpaces(inputSentence);
+
+  return await use.load().then((model) => {
+    return model.embed([sentence]).then((embeds) => {
+      const embedding = embeds.arraySync()[0];
+      const embeddingObject = {};
+      embeddingObject[sentence] = embedding;
+      return embeddingObject;
+    });
   });
 }
 
-async function getSimilarityPercent(embed1, embed2) {
-  const similarity = await cosineSimilarity(embed1, embed2);
+function camelCaseToSpaces(sentence) {
+  // try this: camelCaseToSpaces('thisIsAGoodIDMatchFor   myIDChecker')
+  return sentence
+    .replace(/\s+/g, " ") // a   b -> a b
+    .replace(/([a-z])([A-Z])/g, "$1 $2") // aA -> a A
+    .replace(/([A-Z]+)([A-Z])([a-z])/g, "$1 $2$3"); // IDMap -> ID Map
+}
+
+async function compareSentences(sentence1, sentence2) {
+  /**
+   * usage:
+   * const similarityPercent = await compareSentences(sentence1, sentence2);
+   */
+
+  const sentencePair = [sentence1, sentence2];
+  if (typeof sentence2 === "undefined" && Array.isArray(sentence1)) {
+    sentencePair[0] = sentence1[0];
+    sentencePair[1] = sentence1[1];
+  }
+
+  const similarityPercent = await use.load().then(async (model) => {
+    return await model.embed(sentencePair).then(async (embeddings) => {
+      const embeds = await embeddings.arraySync();
+      return await compareEmbeddings(embeds[0], embeds[1]);
+    });
+  });
+  return similarityPercent;
+}
+
+async function compareEmbeddings(embedding1, embedding2) {
+  /**
+   * usage:
+   * const similarityPercent = await compareEmbeddings(embeddingsObject["hi"], embeddingsObject["hello"]);
+   */
+
+  // much faster than compareSentences since not embedding
+  const similarityDecimal = await cosineSimilarity(embedding1, embedding2);
   // cosine similarity -> % when doing text comparison, since cannot have -ve term frequencies: https://en.wikipedia.org/wiki/Cosine_similarity
-  return similarity;
+  const similarityPercent = Math.round(similarityDecimal * 100 * 100) / 100;
+  return similarityPercent;
 }
 
 async function cosineSimilarity(a, b) {
@@ -106,12 +113,10 @@ function dotProduct(a, b) {
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
-      useTensorFlowJs,
-      useModelToEmbedAllWords,
       embedAllSentences,
-      compare,
-      useModel,
-      getSimilarityPercent,
+      embed1Sentence,
+      compareSentences,
+      compareEmbeddings,
     };
   }
 }

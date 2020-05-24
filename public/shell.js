@@ -17,9 +17,9 @@ async function sendShellCommand(command, callback) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ command: command }),
+    body: JSON.stringify({ command }),
   }).then((res) => {
-    console.log(res, true);
+    console.log(`Result: ${res.statusText}`, true);
     return res.statusText;
   });
   if (callback) callback(statusText);
