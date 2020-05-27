@@ -42,6 +42,7 @@ db.takeaways.find()
 ## Todo
 
 - investigate more efficient way to search nearest embeddings (instead of checking every single one stored in memory): <https://cloud.google.com/solutions/machine-learning/building-real-time-embeddings-similarity-matching-system>
+  - Here's [Annoy](https://github.com/spotify/annoy), but with bindings for Node: <https://www.npmjs.com/package/annoy> for efficient Approximate Nearest Neighbors search (instead of checking every single one stored in memory)
 
 ### Steps
 

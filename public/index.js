@@ -16,8 +16,8 @@ async function startup() {
       console.log(message, true);
     },
   });
-  console.log("Running startup tests.", true);
-  say("Running startup tests.");
+  console.log("Running tests.", true);
+  say("Running tests.");
   await runStartupTests();
   say("When you're done, remember to run yarn stop.");
   const api = getApi1LevelDeep(document.body);
