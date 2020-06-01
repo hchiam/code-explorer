@@ -39,10 +39,6 @@ db.takeaways.remove({'some-key':{$regex:/some-data/}})
 db.takeaways.find()
 ```
 
-## Todo
-
-- Here's [Annoy](https://github.com/spotify/annoy), but with bindings for Node: <https://www.npmjs.com/package/annoy> for (instead of checking every single one stored in memory)
-
 ### Steps
 
 1. get goal
