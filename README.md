@@ -41,8 +41,7 @@ db.takeaways.find()
 
 ## Todo
 
-- investigate more efficient way to search nearest embeddings (instead of checking every single one stored in memory): <https://cloud.google.com/solutions/machine-learning/building-real-time-embeddings-similarity-matching-system>
-  - Here's [Annoy](https://github.com/spotify/annoy), but with bindings for Node: <https://www.npmjs.com/package/annoy> for efficient Approximate Nearest Neighbors search (instead of checking every single one stored in memory)
+- Here's [Annoy](https://github.com/spotify/annoy), but with bindings for Node: <https://www.npmjs.com/package/annoy> for (instead of checking every single one stored in memory)
 
 ### Steps
 
@@ -82,3 +81,11 @@ This process is different from semantic code search because it also proactively 
 <https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder>
 
 <https://github.com/hchiam/text-similarity-test>
+
+### ANNOY Node bindings
+
+For an efficient Approximate Nearest Neighbors search of nearest embeddings (instead of checking every single embedding stored in memory every time):
+
+<https://github.com/spotify/annoy>
+
+<https://github.com/jimkang/annoy-node>
