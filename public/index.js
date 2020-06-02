@@ -20,10 +20,12 @@ async function startup() {
   const sentence = api[0].key; // document.body's api[0].key is "text"
   say(`Getting embedding of ${sentence}.`);
   const embedding = await embed1Sentence(sentence);
-  say("The embedding should be displayed in the console log.");
+  say("See console log.");
   console.log(embedding, true);
-  say("Running python script.");
-  await testPython();
+  setTimeout(async function () {
+    say("Running python script.");
+    await testPython();
+  }, 2000);
 }
 
 async function runStartupTests() {
