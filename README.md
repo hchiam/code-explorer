@@ -62,7 +62,7 @@ db.takeaways.find()
    - how use this to check if achieved goal?
 9. report findings from results of actions tried
 
-### Stepping back
+#### Stepping back
 
 This process is different from semantic code search because it also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
 
