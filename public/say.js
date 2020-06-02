@@ -15,6 +15,7 @@ function say(sentence, options) {
       sentence = "I've got a lot to tell you. " + sentence;
     }
     responsiveVoice.speak(sentence, "UK English Male", { rate: rate });
+    console.log(sentence, true);
     if (sentenceCallback) sentenceCallback(sentence);
   }
 }

@@ -11,12 +11,7 @@ if (typeof require !== "undefined") {
 startup();
 
 async function startup() {
-  say("Up and running.", {
-    sentenceCallback: (message) => {
-      console.log(message, true);
-    },
-  });
-  console.log("Running tests.", true);
+  say("Up and running.");
   say("Running tests.");
   await runStartupTests();
   say("When you're done, remember to run yarn stop.");
@@ -33,9 +28,7 @@ async function startup() {
 
 async function runStartupTests() {
   await sendShellCommand("yarn test", (result) => {
-    const tellUser = `Result: ${result}`;
-    console.log(tellUser);
-    say(tellUser);
+    say(`Result: ${result}`);
   });
 }
 
@@ -67,7 +60,6 @@ async function testPython() {
     .then((res) => {
       return res.result;
     });
-  console.log(`output: ${output}`, true);
   say("output: " + output);
   return output;
 }
