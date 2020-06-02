@@ -37,6 +37,19 @@ app.route("/shell").post(function (req, res) {
   res.send({ result: output });
 });
 
+app.route("/python").post(function (req, res) {
+  const scriptPath = req.body.scriptPath;
+  if (!scriptPath) return;
+  console.log(`python script: ${scriptPath}`);
+  const spawn = require("child_process").spawn;
+  const process = spawn("python", [scriptPath]);
+  process.stdout.on("data", function (data) {
+    const output = data.toString();
+    console.log(`Result: ${output}`);
+    res.send({ result: output });
+  });
+});
+
 app.route("/embed1Sentence").post(async function (req, res) {
   const sentence = req.body.sentence;
   if (!sentence) return;
