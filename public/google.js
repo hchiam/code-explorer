@@ -18,8 +18,6 @@ const cheerio = require("cheerio");
 //   console.log(await google(queryBiasedToJs));
 // })();
 
-// TODO: add tests
-
 async function google(what) {
   const url = `https://www.google.com/search?q=${what}`;
   try {
