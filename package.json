@@ -8,9 +8,11 @@
     "@tensorflow/tfjs": "^1.7.4",
     "@tensorflow/tfjs-node": "^1.7.4",
     "annoy": "^3.0.0",
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
-    "mongodb": "^3.5.7"
+    "mongodb": "^3.5.7",
+    "request": "^2.88.2"
   },
   "devDependencies": {},
   "scripts": {
