@@ -30,7 +30,7 @@ async function startup() {
 
 async function runStartupTests() {
   await sendShellCommand("yarn test", (result) => {
-    say(`Result: ${result}`);
+    say(`Test results: ${result}`);
   });
 }
 
