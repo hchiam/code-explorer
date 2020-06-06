@@ -15,10 +15,14 @@ test("imported helper functions are available", async function () {
 });
 
 test(
-  "embedding",
+  "embedding 1 sentence",
   async function () {
-    const embedding = await embed1Sentence("text");
-    expect(typeof embedding).toBe("object");
+    const sentence = "text";
+    const embeddingObject = await embed1Sentence(sentence);
+    const embedding = embeddingObject[sentence];
+    expect(Array.isArray(embedding)).toBe(true);
+    expect(embedding.length).toBe(512);
+    expect(typeof embedding[0]).toBe("number");
   },
   longerWaitForMachineLearningModel
 );
