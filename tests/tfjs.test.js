@@ -5,7 +5,7 @@ const {
   compareEmbeddings,
 } = require("../public/tfjs.js");
 
-const longerWaitForMachineLearningModel = 10000;
+const longerWaitForMachineLearningModel = 15000;
 
 test("imported helper functions are available", async function () {
   expect(typeof embedAllSentences).toBe("function");
