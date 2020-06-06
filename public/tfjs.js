@@ -14,16 +14,14 @@ async function embedAllSentences(inputSentences) {
 
   const sentences = inputSentences.map((s) => camelCaseToSpaces(s));
 
-  return await use.load().then((model) => {
-    return model.embed(sentences).then((embeds) => {
-      const embeddings = embeds.arraySync();
-      let embeddingsObject = {};
-      for (let i = 0; i < embeddings.length; i++) {
-        embeddingsObject[sentences[i]] = embeddings[i];
-      }
-      return embeddingsObject;
-    });
-  });
+  const model = await use.load();
+  const embeds = await model.embed(sentences);
+  const embeddings = await embeds.arraySync();
+  let embeddingsObject = {};
+  for (let i = 0; i < embeddings.length; i++) {
+    embeddingsObject[sentences[i]] = embeddings[i];
+  }
+  return embeddingsObject;
 }
 
 async function embed1Sentence(inputSentence) {
@@ -37,14 +35,12 @@ async function embed1Sentence(inputSentence) {
 
   const sentence = camelCaseToSpaces(inputSentence);
 
-  return await use.load().then((model) => {
-    return model.embed([sentence]).then((embeds) => {
-      const embedding = embeds.arraySync()[0];
-      const embeddingObject = {};
-      embeddingObject[sentence] = embedding;
-      return embeddingObject;
-    });
-  });
+  const model = await use.load();
+  const embeds = await model.embed([sentence]);
+  const embedding = await embeds.arraySync()[0];
+  const embeddingObject = {};
+  embeddingObject[sentence] = embedding;
+  return embeddingObject;
 }
 
 function camelCaseToSpaces(sentence) {
@@ -67,12 +63,10 @@ async function compareSentences(sentence1, sentence2) {
     sentencePair[1] = sentence1[1];
   }
 
-  const similarityPercent = await use.load().then(async (model) => {
-    return await model.embed(sentencePair).then(async (embeddings) => {
-      const embeds = await embeddings.arraySync();
-      return await compareEmbeddings(embeds[0], embeds[1]);
-    });
-  });
+  const model = await use.load();
+  const embeddings = await model.embed(sentencePair);
+  const embeds = await embeddings.arraySync();
+  const similarityPercent = await compareEmbeddings(embeds[0], embeds[1]);
   return similarityPercent;
 }
 

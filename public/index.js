@@ -35,33 +35,29 @@ async function runStartupTests() {
 }
 
 async function embed1Sentence(sentence, callback) {
-  const embedding = await fetch("/embed1Sentence", {
+  const embeddingResponse = await fetch("/embed1Sentence", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ sentence }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      return res.embedding;
-    });
+  });
+  const embeddingJson = await embeddingResponse.json();
+  const embedding = await embeddingJson.embedding;
   if (callback) callback(embedding);
   return embedding;
 }
 
 async function testPython() {
-  const output = await fetch("/python", {
+  const response = await fetch("/python", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ scriptPath: "public/use.py" }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      return res.result;
-    });
+  });
+  const json = await response.json();
+  const output = await json.result;
   say("output: " + output);
   return output;
 }

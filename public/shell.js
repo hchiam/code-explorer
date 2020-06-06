@@ -12,15 +12,14 @@ function runShellCommand(command) {
 }
 
 async function sendShellCommand(command, callback) {
-  const statusText = await fetch("/shell", {
+  const response = await fetch("/shell", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ command }),
-  }).then((res) => {
-    return res.statusText;
   });
+  const statusText = await response.statusText;
   if (callback) callback(statusText);
   return statusText;
 }
