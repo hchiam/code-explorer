@@ -12,7 +12,7 @@ startup();
 
 async function startup() {
   say("Up and running.");
-  say("Running tests.");
+  say("Running tests, excluding TFJS.");
   await runStartupTests();
   say("When you're done, remember to run yarn stop.");
 
@@ -29,7 +29,7 @@ async function startup() {
 }
 
 async function runStartupTests() {
-  await sendShellCommand("yarn test", (result) => {
+  await sendShellCommand("jest --testPathIgnorePatterns tfjs", (result) => {
     say(`Test results: ${result}`);
   });
 }
