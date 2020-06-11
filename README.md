@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+Kinda like JARVIS, but just for coding.
+
 3 CLI tabs:
 
 ## Run database
