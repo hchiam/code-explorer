@@ -15,6 +15,6 @@ test("google results", async function () {
   );
   expect(linkStartsCorrectly).toBe(true);
   expect(results[0].description).toBe(
-    "The reverse() method reverses the order of the elements in an array. Note: this method will change the original array."
+    "JavaScript Array reverse() Method   The reverse() method reverses the order of the elements in an array. Note: this method will change the original array."
   );
 });
