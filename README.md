@@ -87,3 +87,8 @@ For an efficient Approximate Nearest Neighbors search of nearest embeddings (ins
 <https://github.com/spotify/annoy>
 
 <https://github.com/jimkang/annoy-node>
+
+```bash
+# for python:
+pip install --user annoy
+```
