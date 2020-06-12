@@ -1,3 +1,6 @@
+let responsiveVoiceIsRunning = false;
+let consoleLogOverride = false;
+
 function say(sentence, options) {
   if (sentence != "" && typeof responsiveVoice !== "undefined") {
     const sentenceCallback =
@@ -14,8 +17,16 @@ function say(sentence, options) {
       rate = 0.9;
       sentence = "I've got a lot to tell you. " + sentence;
     }
-    responsiveVoice.speak(sentence, "UK English Male", { rate: rate });
-    console.log(sentence, true);
+    responsiveVoiceIsRunning = true;
+    responsiveVoice.speak(sentence, "UK English Male", {
+      rate: rate,
+      onend: () => {
+        responsiveVoiceIsRunning = false;
+      },
+    });
+    consoleLogOverride = true;
+    console.log(sentence);
+    consoleLogOverride = false;
     if (sentenceCallback) sentenceCallback(sentence);
   }
 }
