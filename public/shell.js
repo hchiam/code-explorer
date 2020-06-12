@@ -5,9 +5,9 @@ if (typeof require !== "undefined") {
 }
 
 function runShellCommand(command) {
-  console.log("Running " + command, true);
+  console.log("Running " + command);
   const output = execSync(command, { encoding: "utf-8" }); // the default is 'buffer'
-  console.log(`\n\nShell output:\n\n${output}\n\n`, true);
+  console.log(`\n\nShell output:\n\n${output}\n\n`);
   return output;
 }
 

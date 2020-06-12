@@ -14,7 +14,7 @@ function connectToDb() {
 function connectToCollection(client, db, collectionName) {
   db.createCollection(collectionName, function (err, res) {
     if (err) throw err;
-    console.log("collection created", true);
+    console.log("collection created");
     client.close();
   });
 }
@@ -23,7 +23,7 @@ function insertIntoCollection(client, db, collectionName, data) {
   // example data = { name: 'Company 123', address: '123 Somewhere Street' };
   db.collection(collectionName).insertOne(data, function (err, res) {
     if (err) throw err;
-    console.log("1 document inserted", true);
+    console.log("1 document inserted");
     client.close();
   });
 }
@@ -32,7 +32,7 @@ function deleteFromCollection(client, db, collectionName, query) {
   // example query = { name: { $regex: /Company/ } };
   db.collection(collectionName).deleteMany(query, function (err, obj) {
     if (err) throw err;
-    console.log(`${obj.result.n} document(s) deleted`, true);
+    console.log(`${obj.result.n} document(s) deleted`);
     client.close();
   });
 }

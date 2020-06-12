@@ -4,9 +4,9 @@ function readJson(filePath) {
   filePath = filePath.toString();
   if (filePath.endsWith(".json")) {
     const data = JSON.parse(readFile(filePath, "utf8"));
-    console.log(data, true);
+    console.log(data);
   } else {
-    console.log(`Is file ${filePath} a JSON file?`, true);
+    console.log(`Is file ${filePath} a JSON file?`);
   }
 }
 
