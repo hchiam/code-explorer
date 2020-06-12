@@ -23,6 +23,6 @@
     });
   });
 
-  observer.observe(document.body, config);
+  observer.observe(document.documentElement, config);
   // observer.disconnect();
 })();
