@@ -17,15 +17,16 @@ async function startup() {
   say("When you're done, remember to run yarn stop.");
 
   const api = getApi1LevelDeep(document.body);
-  const sentence = api[0].key; // document.body's api[0].key is "text"
-  say(`Getting embedding of ${sentence}.`);
-  const embedding = await embed1Sentence(sentence);
-  say("See console log.");
-  console.log(embedding, true);
-  setTimeout(async function () {
-    say("Running python script.");
-    await testPython();
-  }, 2000);
+  // const sentence = api[0].key; // document.body's api[0].key is "text"
+  // say(`Getting embedding of ${sentence}.`);
+  // const embedding = await embed1Sentence(sentence);
+  // say("See console log.");
+  // console.log(embedding);
+
+  // setTimeout(async function () {
+  //   say("Running python script.");
+  //   await testPython();
+  // }, 2000);
 }
 
 async function runStartupTests() {
