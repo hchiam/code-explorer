@@ -1,3 +1,7 @@
+function getApiTargetObject(selector) {
+  return document.querySelector(selector);
+}
+
 function getApi1LevelDeep(object) {
   // uses isNaN to try to ignore indices of array, especially of strings
   const api = [];

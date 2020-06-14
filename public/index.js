@@ -1,11 +1,12 @@
 // avoid undefined if require() is undefined:
 var say;
 var sendShellCommand;
+var getApiTargetObject;
 var getApi1LevelDeep;
 if (typeof require !== "undefined") {
   const { say } = require("./say.js");
   const { sendShellCommand } = require("./shell.js");
-  const { getApi1LevelDeep } = require("./api-search.js");
+  const { getApiTargetObject, getApi1LevelDeep } = require("./api-search.js");
 }
 
 startup();
@@ -16,7 +17,8 @@ async function startup() {
   await runStartupTests();
   say("When you're done, remember to run yarn stop.");
 
-  const api = getApi1LevelDeep(document.body);
+  const object = getApiTargetObject("button");
+  const api = getApi1LevelDeep(object);
   // const sentence = api[0].key; // document.body's api[0].key is "text"
   // say(`Getting embedding of ${sentence}.`);
   // const embedding = await embed1Sentence(sentence);
