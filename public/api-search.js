@@ -33,6 +33,9 @@ function getApi1LevelDeep(object) {
 
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { getApi1LevelDeep };
+    module.exports = {
+      getApiTargetObject,
+      getApi1LevelDeep,
+    };
   }
 }

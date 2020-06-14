@@ -54,6 +54,8 @@ async function google(what) {
 
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { google };
+    module.exports = {
+      google,
+    };
   }
 }

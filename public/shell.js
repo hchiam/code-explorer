@@ -26,6 +26,9 @@ async function sendShellCommand(command, callback) {
 
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { runShellCommand, sendShellCommand };
+    module.exports = {
+      runShellCommand,
+      sendShellCommand,
+    };
   }
 }

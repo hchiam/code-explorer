@@ -33,6 +33,8 @@ function say(sentence, options) {
 
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { say };
+    module.exports = {
+      say,
+    };
   }
 }

@@ -16,6 +16,9 @@ function readFile(filePath) {
 
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { readJson, readFile };
+    module.exports = {
+      readJson,
+      readFile,
+    };
   }
 }
