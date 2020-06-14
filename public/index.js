@@ -51,6 +51,20 @@ async function embed1Sentence(sentence, callback) {
   return embedding;
 }
 
+async function embedAllSentences(sentences, callback) {
+  const embeddingResponse = await fetch("/embedAllSentences", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sentences }),
+  });
+  const embeddingJson = await embeddingResponse.json();
+  const embeddingsObject = await embeddingJson.embeddingsObject;
+  if (callback) callback(embeddingsObject);
+  return embeddingsObject;
+}
+
 async function testPython() {
   const response = await fetch("/python", {
     method: "POST",
