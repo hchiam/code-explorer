@@ -43,26 +43,31 @@ db.takeaways.find()
 
 ### Steps
 
+For now, most critical are 1, 2, 5, 10: (goal, store embeddings, try nearest, report results)
+
 1. get goal
 2. get embeddings of props/actions
-3. get embeddings so it can get ideas of combos to try:
+   - store these embeddings for faster access later if repeated
+3. BONUS: get embeddings so it can get ideas of combos to try:
    - get embeddings of docs sentences that are associated with API props/actions
    - get code examples from docs API to generate example inputs
    - get embeddings of any error logs (compare to props/actions/docs embeddings)
    - get embeddings of any google suggestion sentence (compare to props/actions/docs embeddings)
-4. check if any action combos get the goal result already (key: result, value: action combo)
-5. choose closest embeddings to goal or error log:
+4. BONUS: check if any action combos get the goal result already (key: result, value: action combo)
+5. choose closest embeddings to goal
+   - check nearness of embeddings of single actions (try shallow API first)
+6. BONUS: choose closest embeddings to error log:
    - check nearness of embeddings of single actions (try shallow API first)
    - check nearness of embeddings of combos suggested by docs/google/error logs
-6. get different ways to make combos:
+7. BONUS: get different ways to make combos:
    - sequence functions (doSomething(); doSomethingElseAfter();)
    - within/chained functions, conceptually includes "=" (doSomethingAfter(doSomethingFirst()))
-7. try combos/single actions:
+8. BONUS: try combos/single actions:
    - with delay between things tried
    - in either codepen or new sandboxed browser instances (for safety and to isolate variables)
-8. get and store results and results frequencies for what tried:
+9. BONUS: get and store results and results frequencies for what tried:
    - how use this to check if achieved goal?
-9. report findings from results of actions tried
+10. report findings from results of actions tried
 
 #### Stepping back
 
