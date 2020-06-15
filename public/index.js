@@ -15,10 +15,11 @@ async function startup() {
   say("Up and running.");
   say("Running tests, excluding TFJS.");
   await runStartupTests();
-  say("When you're done, remember to run yarn stop.");
 
-  const object = getApiTargetObject("button");
-  const api = getApi1LevelDeep(object);
+  say("Running an API test.", {
+    sentenceCallback: runApiTest,
+  });
+
   // const sentence = api[0].key; // document.body's api[0].key is "text"
   // say(`Getting embedding of ${sentence}.`);
   // const embedding = await embed1Sentence(sentence);
@@ -29,12 +30,25 @@ async function startup() {
   //   say("Running python script.");
   //   await testPython();
   // }, 2000);
+
+  say("When you're done, remember to run yarn stop.");
 }
 
 async function runStartupTests() {
   await sendShellCommand("jest --testPathIgnorePatterns tfjs", (result) => {
     say(`Test results: ${result}`);
   });
+}
+
+function runApiTest() {
+  const object = getApiTargetObject("button");
+  const api = getApi1LevelDeep(object);
+  console.log("API: ", api);
+  const functionsCount = api.filter((x) => x.type === "function").length;
+  const objectsCount = api.filter((x) => x.type === "object").length;
+  say(
+    `API has ${api.length} results, with ${functionsCount} functions and ${objectsCount} objects. Details in console log.`
+  );
 }
 
 async function embed1Sentence(sentence, callback) {
