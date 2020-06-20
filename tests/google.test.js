@@ -10,9 +10,11 @@ test("google results", async function () {
   expect(results[0].header).toBe(
     "JavaScript Array reverse() Method - W3Schools"
   );
-  const linkStartsCorrectly = results[0].link.startsWith(
-    "https://www.google.com//url?q=https://www.w3schools.com/jsref/jsref_reverse.asp"
-  );
+  const linkStartsCorrectly = results[0].link
+    .toLowerCase()
+    .startsWith(
+      "https://www.google.com//url?q=https://www.w3schools.com/jsref/jsref_reverse.asp"
+    );
   expect(linkStartsCorrectly).toBe(true);
   expect(results[0].description).toBe(
     "JavaScript Array reverse() Method   The reverse() method reverses the order of the elements in an array. Note: this method will change the original array."
