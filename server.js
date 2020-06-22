@@ -4,7 +4,7 @@ const { runShellCommand } = require("./public/shell.js");
 const {
   embedAllSentences,
   embed1Sentence,
-  compareSentences,
+  // compareSentences,
   compareEmbeddings,
 } = require("./public/tfjs.js");
 
@@ -56,7 +56,7 @@ app.route("/embed1Sentence").post(async function (req, res) {
   console.log(`getting embedding for this sentence: ${sentence}`);
   const embeddingObject = await embed1Sentence(sentence);
   const embedding = embeddingObject[sentence];
-  console.log(`Embedding retrieved.`);
+  console.log("Embedding retrieved.");
   res.send({ embedding });
 });
 
@@ -65,7 +65,7 @@ app.route("/embedAllSentences").post(async function (req, res) {
   if (!sentences) return;
   console.log(`getting embedding for ${sentences.length} sentences.`);
   const embeddingsObject = await embedAllSentences(sentences);
-  console.log(`Embeddings retrieved.`);
+  console.log("Embeddings retrieved.");
   res.send({ embeddingsObject });
 });
 
