@@ -1,3 +1,6 @@
+# https://github.com/jimkang/annoy-node
+# https://github.com/spotify/annoy
+
 """
 pip install --user annoy
 or
@@ -18,10 +21,11 @@ v1 = [-5.0, -4.5, -3.2, -2.8, -2.1, -1.5, -0.34, 0, 3.7, 6]
 def load_existing_storage():
     storage.load(STATIC_STORAGE_PATH)
     # storage.unbuild()  # this won't work
+    # can't unbuild to add to storage if it's already saved
     # https://github.com/spotify/annoy/issues/174#issuecomment-319554923
     # https://github.com/spotify/annoy/issues/403#issuecomment-520616560
 
-    # maybe have to re-index all:
+    # have to re-index all to "add" new:
     # https://github.com/spotify/annoy/issues/447#issuecomment-574836547
 
 

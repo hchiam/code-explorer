@@ -1,6 +1,13 @@
 // https://github.com/jimkang/annoy-node
 // https://github.com/spotify/annoy
 
+// can't unbuild to add to storage if it's already saved
+// https://github.com/spotify/annoy/issues/174#issuecomment-319554923
+// https://github.com/spotify/annoy/issues/403#issuecomment-520616560
+
+// have to re-index all to "add" new:
+// https://github.com/spotify/annoy/issues/447#issuecomment-574836547
+
 let Annoy;
 if (typeof require !== "undefined") {
   Annoy = require("annoy");
