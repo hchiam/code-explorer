@@ -5,6 +5,7 @@ pip3 install --user annoy
 """
 
 # compared to use-ann.js, this could have better perf
+# because it can unbuild to add data, which the .js can't
 
 # TODO: https://github.com/spotify/annoy/issues/174
 # https://github.com/spotify/annoy/pull/178/files
