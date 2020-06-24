@@ -34,7 +34,9 @@ def init():
     storage.add_item(1, [5.0, 4.5, 3.2, 2.8, 2.1, 1.5, 0.34, 0, -3.7, -6])
     storage.add_item(2, [0, 0, 0, 0, 0, -1, -1, -0.2, 0.1, 0.8])
     storage.build(1)  # 1 tree
+    # no more items can be added after .build()
     storage.save(STATIC_STORAGE_PATH)
+    # can't .unbuild() after .save()
     print("number of items in storage", storage.get_n_items())
 
 
