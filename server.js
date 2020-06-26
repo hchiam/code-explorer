@@ -63,7 +63,7 @@ app.route("/embed1Sentence").post(async function (req, res) {
 app.route("/embedAllSentences").post(async function (req, res) {
   const sentences = req.body.sentences;
   if (!sentences) return;
-  console.log(`getting embedding for ${sentences.length} sentences.`);
+  console.log(`getting embeddings for ${sentences.length} sentences.`);
   const embeddingsObject = await embedAllSentences(sentences);
   console.log("Embeddings retrieved.");
   res.send({ embeddingsObject });

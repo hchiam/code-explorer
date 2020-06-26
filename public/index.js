@@ -22,13 +22,17 @@ async function startup() {
   say("Testing.", {
     sentenceCallback: async () => {
       const api = runApiTest();
-      const sentence = addSpaces(api[0].key);
-      console.log("embed this sentence:", sentence);
-      const embedding = await embed1Sentence(sentence);
-      console.log("embedding", embedding);
-      say(
-        `Embedding shown in console log for the following sentence: "${sentence}"`
-      );
+      const sentences = api.map((a) => addSpaces(a.key));
+      console.log(`embedding ${sentences.length} sentences`);
+      const embeddingsObject = await embedAllSentences(sentences);
+      console.log("embeddingsObject", embeddingsObject);
+      say("See console log for embedding results.");
+
+      // see if ANNOY can store
+
+      // say(
+      //   `Embedding shown in console log for the following sentence: "${sentence}"`
+      // );
     },
   });
 
