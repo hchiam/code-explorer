@@ -48,6 +48,7 @@ For now, most critical are 1, 2, 5, 10: (goal, store embeddings, try nearest, re
 1. get goal
 2. get embeddings of props/actions
    - store these embeddings for faster access later if repeated
+   - (use ANNOY to get stored index and recreate index with updated data)
 3. BONUS: get embeddings so it can get ideas of combos to try:
    - get embeddings of docs sentences that are associated with API props/actions
    - get code examples from docs API to generate example inputs
