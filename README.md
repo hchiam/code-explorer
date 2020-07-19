@@ -1,6 +1,6 @@
 # Code Explorer
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![version](https://img.shields.io/github/release/hchiam/code-explorer) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Kinda like JARVIS, but just for coding.
 
