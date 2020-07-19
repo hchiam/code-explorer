@@ -43,7 +43,7 @@ db.takeaways.find()
 
 ### Steps
 
-For now, most critical are 1, 2, 5, 10: (goal, store embeddings, try nearest, report results)
+For now, most critical are 1, 2, 5, 8, 11: (goal, nearest, ask, report/show)
 
 1. get goal
 2. get embeddings of props/actions
@@ -63,12 +63,13 @@ For now, most critical are 1, 2, 5, 10: (goal, store embeddings, try nearest, re
 7. BONUS: get different ways to make combos:
    - sequence functions (doSomething(); doSomethingElseAfter();)
    - within/chained functions, conceptually includes "=" (doSomethingAfter(doSomethingFirst()))
-8. BONUS: try combos/single actions:
+8. ask/suggest before trying (for security)
+9. BONUS: try combos/single actions:
    - with delay between things tried
    - in either codepen or new sandboxed browser instances (for safety and to isolate variables)
-9. BONUS: get and store results and results frequencies for what tried:
-   - how use this to check if achieved goal?
-10. report findings from results of actions tried
+10. BONUS: get and store results and results frequencies for what tried:
+    - how use this to check if achieved goal?
+11. report/show findings from results of actions tried (variable value + UI, which may be in a CodePen if possible)
 
 #### Stepping back
 
