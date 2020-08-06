@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@hchiam/deps": "^2.0.0",
     "@tensorflow-models/universal-sentence-encoder": "^1.2.2",
     "@tensorflow/tfjs": "^1.7.4",
     "@tensorflow/tfjs-node": "^1.7.4",

@@ -21,7 +21,10 @@ node server.js
 ## See dependency graph
 
 ```bash
-depcruise --exclude "^node_modules" --output-type dot . | dot -T svg > dependencygraph.svg; open -a "Firefox" dependencygraph.svg;
+deps
+# for example:
+# Enter max depth:
+# Enter src folder (or folder or file you'd like to inspect): public/index.js
 ```
 
 ## Debug database
