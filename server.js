@@ -2,6 +2,7 @@ const { readJson } = require("./public/read-files.js");
 // const { connectToDb } = require("./public/use-db.js");
 const { runShellCommand } = require("./public/shell.js");
 const {
+  getClosest,
   embedAllSentences,
   embed1Sentence,
   // compareSentences,
@@ -69,11 +70,14 @@ app.route("/embedAllSentences").post(async function (req, res) {
   res.send({ embeddingsObject });
 });
 
-app.route("/compareEmbeddings").post(async function (req, res) {
+app.route("/getClosest").post(async function (req, res) {
   const sentence = req.body.sentence;
+  const embeddingsObject = req.body.embeddingsObject;
   if (!sentence) return;
-  console.log(`getting embedding for this sentence: ${sentence}`);
-  const similarityPercent = await compareEmbeddings(sentence);
-  console.log(`Similarity percent: ${similarityPercent}`);
-  res.send({ similarityPercent });
+  console.log(
+    `getting sentence with closest embedding to this sentence: ${sentence}`
+  );
+  const closestSentence = await getClosest(sentence, embeddingsObject);
+  console.log(`Closest sentence: ${closestSentence}`);
+  res.send({ closestSentence });
 });
