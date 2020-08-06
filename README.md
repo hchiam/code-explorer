@@ -46,6 +46,10 @@ deps
 # Enter src folder (or folder or file you'd like to inspect): public/index.js
 ```
 
+<img src="https://raw.githubusercontent.com/hchiam/code-explorer/master/dependencygraph.svg">
+
+<img src="https://raw.githubusercontent.com/hchiam/code-explorer/master/public/dependencygraph.svg">
+
 ## Steps
 
 For now, most critical are 1, 2, 5, 8, 11: (goal, nearest, ask, report/show)
