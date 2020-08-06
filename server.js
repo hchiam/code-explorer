@@ -1,5 +1,5 @@
 const { readJson } = require("./public/read-files.js");
-const { connectToDb } = require("./public/use-db.js");
+// const { connectToDb } = require("./public/use-db.js");
 const { runShellCommand } = require("./public/shell.js");
 const {
   embedAllSentences,
@@ -25,7 +25,7 @@ app.route("/").get(function (req, res) {
   console.log("GET");
   res.sendFile(process.cwd() + "/views/index.html");
   readJson("takeaways.json");
-  connectToDb();
+  // connectToDb();
 });
 
 app.route("/shell").post(function (req, res) {
