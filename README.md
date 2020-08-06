@@ -4,30 +4,25 @@
 
 Kinda like JARVIS, but just for coding.
 
-3 CLI tabs:
+## Setup
 
-## Run database
+`yarn` to install dependencies.
+
+The you can run 3 CLI tabs: (or just do `yarn start` - don't forget to do `yarn stop` when you're done)
+
+### Run database
 
 ```bash
 mongod --dbpath=data
 ```
 
-## Run server
+### Run server
 
 ```bash
 node server.js
 ```
 
-## See dependency graph
-
-```bash
-deps
-# for example:
-# Enter max depth:
-# Enter src folder (or folder or file you'd like to inspect): public/index.js
-```
-
-## Debug database
+### Debug database
 
 ```bash
 # https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm
@@ -44,7 +39,16 @@ db.takeaways.remove({'some-key':{$regex:/some-data/}})
 db.takeaways.find()
 ```
 
-### Steps
+## See dependency graph
+
+```bash
+deps
+# for example:
+# Enter max depth:
+# Enter src folder (or folder or file you'd like to inspect): public/index.js
+```
+
+## Steps
 
 For now, most critical are 1, 2, 5, 8, 11: (goal, nearest, ask, report/show)
 
@@ -74,7 +78,7 @@ For now, most critical are 1, 2, 5, 8, 11: (goal, nearest, ask, report/show)
     - how use this to check if achieved goal?
 11. report/show findings from results of actions tried (variable value + UI, which may be in a CodePen if possible)
 
-#### Stepping back
+### Stepping back
 
 This process is different from semantic code search because it also proactively checks error logs, tries combinations, and checks results (at least tries to, in a sandbox).
 
