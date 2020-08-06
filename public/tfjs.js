@@ -1,6 +1,47 @@
 require("@tensorflow/tfjs-node");
 const use = require("@tensorflow-models/universal-sentence-encoder"); // U.S.E.
 
+async function getClosest(inputSentence, embeddingsObject) {
+  /**
+   *
+   * TODO:
+   *
+   * replace with something like the python get_nns_by_vector
+   *
+   **/
+
+  const namesAndSimilarities = [];
+
+  const sentenceEmbeddingObject = await embed1Sentence(inputSentence);
+  const sentenceEmbedding =
+    sentenceEmbeddingObject[Object.keys(sentenceEmbeddingObject)];
+  const arrayOfEmbeddingsObjects = Object.keys(embeddingsObject).map((key) => {
+    return { name: key, embedding: embeddingsObject[key] };
+  });
+  for (let i = 0; i < arrayOfEmbeddingsObjects.length; i++) {
+    const otherEmbeddingObject = arrayOfEmbeddingsObjects[i];
+    const otherEmbedding =
+      otherEmbeddingObject[Object.keys(otherEmbeddingObject)];
+    const otherEmbeddingName = Object.keys(otherEmbeddingObject);
+    const similarityPercent = await compareEmbeddings(
+      sentenceEmbedding,
+      otherEmbedding
+    );
+    namesAndSimilarities.push({
+      name: otherEmbeddingName,
+      similarity: similarityPercent,
+    });
+  }
+  let maxSimilarity = 0;
+  let maxName = "";
+  for (let i = 0; i < namesAndSimilarities.length; i++) {
+    if (namesAndSimilarities[i].similarity > maxSimilarity) {
+      maxName = namesAndSimilarities[i].name;
+    }
+  }
+  return maxName;
+}
+
 async function embedAllSentences(inputSentences) {
   /**
    * usage:
@@ -107,6 +148,7 @@ function dotProduct(a, b) {
 if (typeof exports !== "undefined") {
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
+      getClosest,
       embedAllSentences,
       embed1Sentence,
       compareSentences,

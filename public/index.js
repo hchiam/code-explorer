@@ -4,13 +4,16 @@ var sendShellCommand;
 var getApiTargetObject;
 var getApi1LevelDeep;
 var addSpaces;
+var getClosest;
 if (typeof require !== "undefined") {
   const { say } = require("./say.js");
   const { sendShellCommand } = require("./shell.js");
   const { getApiTargetObject, getApi1LevelDeep } = require("./api-search.js");
   const { addSpaces } = require("./sentence-with-spaces.js");
+  const { getClosest } = require("./tfjs.js");
 }
 
+let embeddingsObject;
 startup();
 
 async function startup() {
@@ -24,9 +27,12 @@ async function startup() {
       const api = runApiTest();
       const sentences = api.map((a) => addSpaces(a.key));
       console.log(`embedding ${sentences.length} sentences`);
-      const embeddingsObject = await embedAllSentences(sentences);
+      embeddingsObject = await embedAllSentences(sentences);
       console.log("embeddingsObject", embeddingsObject);
       say("See console log for embedding results.");
+      const nearest = getClosest("check valid", embeddingsObject);
+      console.log("Nearest: ");
+      console.log(nearest);
 
       // see if ANNOY can store
 
