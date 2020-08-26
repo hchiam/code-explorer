@@ -108,3 +108,7 @@ For an efficient Approximate Nearest Neighbors search of nearest embeddings (ins
 # for python:
 pip install --user annoy
 ```
+
+### You might be interested in
+
+<https://github.com/hchiam/sourcefetch-server>
