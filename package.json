@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js & (sleep 3; open http://localhost:8000)",
+    "start": "node server.js & (open https://codepen.io/hchiam/full/PEMgBN; sleep 3; open http://localhost:8000)",
     "start_db": "mongod --dbpath=data & node server.js & (sleep 3; open http://localhost:8000; mongo)",
     "stop": "killall node; killall mongod;",
     "test": "jest"
