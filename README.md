@@ -112,3 +112,5 @@ pip install --user annoy
 ### You might be interested in
 
 <https://github.com/hchiam/sourcefetch-server>
+
+<https://github.com/hchiam/code-assistant>
