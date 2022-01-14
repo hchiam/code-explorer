@@ -9,7 +9,7 @@
     "@tensorflow/tfjs": "^1.7.4",
     "@tensorflow/tfjs-node": "^1.7.4",
     "annoy": "^3.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
